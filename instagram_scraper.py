@@ -26,7 +26,6 @@ if __name__ == "__main__":
     parser.add_argument('--op-folder', type=str, default='insta_profiles', help='Output folder path')
     parser.add_argument('--seconds-to-wait', type=int, default=5, help='Number of seconds to wait between each '
                                                                         'request of the data (scrolling for instance)')
-    parser.add_argument('--public-page', action='store_true', help='To know if it is a public page')
     args = parser.parse_args()
 
     user_agent = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:105.0) Gecko/20100101 Firefox/105.0'
@@ -37,25 +36,24 @@ if __name__ == "__main__":
     browser = webdriver.Firefox(service=firefox_service, options=firefox_option)
     wait = WebDriverWait(browser, 50)
 
-    if not args.public_page:
-        browser.get(insta_page)
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_a9-- _a9_0']"))).click()
-        time.sleep(1)
-        # Login with credentials
-        wait.until(EC.element_to_be_clickable((By.NAME, "username"))).send_keys(args.insta_username)
-        wait.until(EC.element_to_be_clickable((By.NAME, "password"))).send_keys(args.insta_password)
-        wait.until(EC.element_to_be_clickable(
-            (By.XPATH, "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p  _abak _abb8 _abbq _abb- _abcm']"))).click()
-        print("Logged in")
+    browser.get(insta_page)
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_a9-- _a9_0']"))).click()
+    time.sleep(1)
+    # Login with credentials
+    wait.until(EC.element_to_be_clickable((By.NAME, "username"))).send_keys(args.insta_username)
+    wait.until(EC.element_to_be_clickable((By.NAME, "password"))).send_keys(args.insta_password)
+    wait.until(EC.element_to_be_clickable(
+        (By.XPATH, "//div[@class='_ab8w  _ab94 _ab99 _ab9f _ab9m _ab9p  _abak _abb8 _abbq _abb- _abcm']"))).click()
+    print("Logged in")
 
-        time.sleep(2)
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acap _acas']"))).click()
-        print("Save info is clicked")
+    time.sleep(2)
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_acan _acap _acas']"))).click()
+    print("Save info is clicked")
 
-        # Turn off notifications
-        wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_a9-- _a9_1']"))).click()
-        print("Turn off notification is clicked")
-        time.sleep(2)
+    # Turn off notifications
+    wait.until(EC.element_to_be_clickable((By.XPATH, "//button[@class='_a9-- _a9_1']"))).click()
+    print("Turn off notification is clicked")
+    time.sleep(2)
 
     insta_page = insta_page + args.insta_profile_id
     browser.get(insta_page)
