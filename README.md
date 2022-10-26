@@ -10,8 +10,4 @@ Some examples on how to run these scripts:
 
 ``python instagram_scraper.py --insta-username=email_insta  --insta-profile-id=friend_id --op-folder=insta_profiles --insta-password=password``
 
-In case, it's a public page, you can add the following flag to the command to remove the login part of the whole process:
-
-`--public-page`
-
 Once done, you can use the [DreamBooth colab notebook](https://bytexd.com/how-to-use-dreambooth-to-fine-tune-stable-diffusion-colab/) to create beautiful images of your friends or your idols. Again, this is only for educational purposes and I hope no one will use it to harm anyone.
